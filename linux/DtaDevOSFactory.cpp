@@ -112,7 +112,8 @@ dictionary * getOSSpecificInformation(OSDEVICEHANDLE osDeviceHandle,
   dictionary & deviceProperties = *pDeviceProperties;
   // const char *value, *key;
   // FOREACH_DEVICE_PROPERTY(device, key, value) deviceProperties[key] = value ;
-  for (const char *value, *key = sd_device_get_property_first(device, &value);
+  const char *key, *value;
+  for (key = sd_device_get_property_first(device, &value);
        key != NULL;
        key = sd_device_get_property_next(device, &value))
   {
@@ -159,6 +160,8 @@ dictionary * getOSSpecificInformation(OSDEVICEHANDLE osDeviceHandle,
   } else if (bus == "usb") {
     if (deviceProperties["ID_USB_DRIVER"]=="uas") {
       device_info.devType = DEVICE_TYPE_SAS;
+//    } else if (deviceProperties["ID_USB_DRIVER"]=="usb-storage") {
+//      device_info.devType = DEVICE_TYPE_NVME;
     }
   } else if (bus == "ata") {
     if (deviceProperties["ID_USB_DRIVER"]=="uas") {

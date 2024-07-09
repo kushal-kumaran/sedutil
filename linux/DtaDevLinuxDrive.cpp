@@ -60,7 +60,8 @@ DtaDevOSDrive * DtaDevOSDrive::getDtaDevOSDrive(const char * devref,
                                                 DTA_DEVICE_INFO &device_info,
                                                 bool& accessDenied)
 {
-  return static_cast<DtaDevOSDrive *>(DtaDevLinuxDrive::getDtaDevLinuxDrive(devref, device_info, accessDenied));
+  DtaDevLinuxDrive * drive=DtaDevLinuxDrive::getDtaDevLinuxDrive(devref, device_info, accessDenied);
+  return static_cast<DtaDevOSDrive *>(drive);
 }
 
 
