@@ -30,6 +30,11 @@ typedef enum _sedutiloutput {
 	sedutilJSON
 } sedutiloutput;
 
+typedef enum _passwordformat {
+	pwdPlain,
+	pwdHex,
+} passwordformat;
+
 /** Structure representing the command line issued to the program */
 typedef struct _DTA_OPTIONS {
     uint8_t password;   /**< password supplied */
@@ -48,6 +53,7 @@ typedef struct _DTA_OPTIONS {
     bool secure_mode; /** global parameter, enable the secure mode */
     bool ask_password; /** global parameter, to know if the password needs to be interactively asked to the user */
 	sedutiloutput output_format;
+	passwordformat password_format;
 } DTA_OPTIONS;
 /** Print a usage message */
 void usage();

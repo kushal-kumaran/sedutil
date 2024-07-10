@@ -70,8 +70,18 @@ void DtaHashPwd(vector<uint8_t> &hash, char * password, DtaDev * d)
 
     if (d->no_hash_passwords) {
         hash.clear();
-	for (uint16_t i = 0; i < strnlen(password, 32); i++)
-		hash.push_back(password[i]);
+	if (d->password_format == pwdHex) {
+		for (uint16_t i = 0; i < strnlen(password, 64); i += 2) {
+			std::string encCh = std::string(password + i, 2);
+			uint8_t byte;
+			std::istringstream(encCh) >> std::hex >> byte;
+			hash.push_back(byte);
+		}
+	} else {
+		for (uint16_t i = 0; i < strnlen(password, 32); i++) {
+			hash.push_back(password[i]);
+		}
+	}
 	// add the token overhead
 	hash.insert(hash.begin(), (uint8_t)hash.size());
 	hash.insert(hash.begin(), 0xd0);

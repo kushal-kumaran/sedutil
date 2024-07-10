@@ -295,6 +295,7 @@ public:
 	/** return the communications ID to be used for sessions to this device */
 	virtual uint16_t comID() = 0;
 	bool no_hash_passwords; /** disables hashing of passwords */
+	passwordformat password_format; /** format in which passwords are supplied */
 	sedutiloutput output_format; /** standard, readable, JSON */
 protected:
 	const char * dev;   /**< character string representing the device in the OS lexicon */
