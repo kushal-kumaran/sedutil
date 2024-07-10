@@ -159,6 +159,10 @@ uint8_t DtaOptions(int argc, char * argv[], DTA_OPTIONS * opts)
             opts->no_hash_passwords = true;
 #endif //__linux__
         }
+		else if (!strcmp("-x", argv[i])) {
+			baseOptions += 1;
+			opts->password_format = pwdHex;
+		}
 		else if (!strcmp("-l", argv[i])) {
 			baseOptions += 1;
 			opts->output_format = sedutilNormal;
