@@ -1,0 +1,8 @@
+Virtual devices somehow give "Unknown OPAL SSC" as well as "Invalid or unsupported device"
+Container devices and nonexistent devices just give out nothing.
+Those are w.r.t. --query.  --scan looks pretty clean.
+
+Big TODO is to lift common Drive code to Common, leaving only a very OS-specific subclass in e.g. linux.
+I.e.  where I now have DtaDevMacOSScsiDrive in ./linux,
+      I would instead have DtaDevScsiDrive in ./Common that would handle e.g. all the Page80 stuff and
+                           DtaDevMacOSScsiDrive in ./linux would just handle PerformSCSICommand (and perhaps __identify)
